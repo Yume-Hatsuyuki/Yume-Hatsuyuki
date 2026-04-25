@@ -1,0 +1,11 @@
+# 确保所有路径下的 json 都强制 UTF-8
+/*.json
+  Content-Type: application/json; charset=utf-8
+
+# 专门针对 favicon 目录下的 manifest
+/favicon/site.webmanifest
+  Content-Type: application/manifest+json; charset=utf-8
+
+# 兜底：确保跨域正常
+/*
+  Access-Control-Allow-Origin: *
