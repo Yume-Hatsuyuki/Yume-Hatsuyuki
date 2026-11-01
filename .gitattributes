@@ -1,0 +1,33 @@
+# 自动识别文本文件，提交时转为 LF
+* text=auto
+
+# 明确标记二进制文件（图片、字体、压缩包），避免 Git 误判
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.webp binary
+*.svg binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.zip binary
+*.gz binary
+
+# 强制关键配置文件始终以 LF 存储，防止部署时出错
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+_headers text eol=lf
+_redirects text eol=lf
+CNAME text eol=lf
+
+# Shell 脚本必须 LF，否则 Linux 上无法执行
+*.sh text eol=lf
+
+# 锁定文件通常不需要 diff
+package-lock.json -diff
+yarn.lock -diff

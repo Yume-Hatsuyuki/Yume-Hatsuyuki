@@ -1,0 +1,454 @@
+/* ============================================================
+   components.css — 角色属性表、卷轴卡片、密文档案
+   梦初雪 (Yume Hatsuyuki) 角色档案卷轴
+   ============================================================ */
+
+/* ── 角色属性表格 ─────────────────────────────────────────── */
+.profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.profile-table th {
+    text-align: left;
+    padding: 0.8rem 1rem;
+    background: linear-gradient(135deg, var(--parchment-burnt), var(--parchment-dark));
+    color: var(--ink-iron);
+    font-weight: 700;
+    border: 1px solid var(--ink-sepia);
+    position: relative;
+    min-width: 120px;
+}
+
+.profile-table th::before {
+    content: "†";
+    position: absolute;
+    right: 8px;
+    color: var(--ink-gold);
+}
+
+.profile-table td {
+    padding: 0.8rem 1rem;
+    background: rgba(240, 230, 210, 0.7);
+    border: 1px solid var(--ink-sepia);
+    color: var(--ink-sepia);
+    vertical-align: top;
+    font-family: 'New Tegomin', 'STSong', 'SimSun', var(--font-body);
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    line-height: 1.7;
+}
+
+/* 颜色样本 */
+.pigment-sample {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--parchment-old);
+    border-radius: 3px;
+    margin-right: 8px;
+    vertical-align: middle;
+    box-shadow:
+        0 2px 4px var(--shadow-light),
+        inset 0 0 4px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.pigment-sample:hover {
+    transform: scale(1.3) rotate(15deg);
+    box-shadow:
+        0 0 8px var(--glow-gold),
+        0 0 12px var(--glow-gold);
+}
+
+/* ── 能力卷轴卡片 ─────────────────────────────────────────── */
+/* 流光配色通过 --flow-* 变量切换：默认金（power），narrative / ability 覆盖 */
+.spell-scroll {
+    --flow-start: var(--flow-gold-start);
+    --flow-mid:   var(--flow-gold-mid);
+    --flow-end:   var(--flow-gold-end);
+    --flow-peak:  1;      /* 流光峰值亮度 */
+    --flow-hue:   0deg;   /* 流光峰值色相偏移 */
+    background:
+        linear-gradient(135deg,
+            rgba(240, 230, 210, 0.95) 0%,
+            rgba(232, 216, 182, 0.95) 100%);
+    border: 2px solid var(--accent, var(--ink-iron));
+    border-radius: 1px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    box-shadow:
+        0 4px 12px var(--shadow-light),
+        inset 0 0 20px rgba(212, 196, 160, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 120px;
+    animation: borderPulse 8s ease-in-out infinite;
+}
+
+.spell-scroll:hover {
+    transform: translateY(-2px) rotate(0.2deg);
+    box-shadow:
+        0 6px 20px var(--shadow-heavy),
+        inset 0 0 30px rgba(212, 196, 160, 0.6);
+}
+
+/* 悬停时整卡强调：字重加粗、发光提亮 */
+.spell-scroll:hover .spell-name {
+    font-weight: 900;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    color: var(--accent-bright, var(--accent)) !important;
+}
+
+.spell-scroll:hover .spell-type {
+    color: var(--parchment-old);
+    background: var(--accent, var(--ink-blood));
+    box-shadow: 0 0 10px var(--accent, var(--ink-blood));
+}
+
+.spell-scroll:hover .spell-divider::before {
+    opacity: 1;
+}
+
+/* 三类卡片的流光配色：结构共用，只覆盖 --flow-* 变量 */
+.spell-scroll.narrative {
+    --flow-start: var(--flow-blood-start);
+    --flow-mid:   var(--flow-blood-mid);
+    --flow-end:   var(--flow-blood-end);
+    --flow-peak:  1.3;
+}
+.spell-scroll.ability {
+    --flow-start: var(--flow-purple-start);
+    --flow-mid:   var(--flow-purple-mid);
+    --flow-end:   var(--flow-purple-end);
+    --flow-peak:  1.2;
+    --flow-hue:   10deg;
+}
+
+/* 分隔线悬停时的流动效果（与顶部流光条共用同一套变量） */
+.spell-scroll:hover .spell-divider::before {
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--flow-start) 20%,
+        var(--flow-mid)   40%,
+        var(--flow-end)   50%,
+        var(--flow-mid)   60%,
+        var(--flow-start) 80%,
+        transparent 100%);
+    background-size: 200% 100%;
+    animation: magicFlow var(--magic-flow-duration) linear infinite;
+}
+
+.spell-scroll:hover .spell-description {
+    color: var(--ink-iron);
+    border-left-color: var(--accent, var(--ink-gold));
+    border-left-width: 3px;
+}
+
+@keyframes borderPulse {
+    0%, 100% {
+        box-shadow:
+            0 4px 12px var(--shadow-light),
+            inset 0 0 20px rgba(212, 196, 160, 0.4);
+    }
+    50% {
+        box-shadow:
+            0 4px 12px var(--shadow-light),
+            inset 0 0 20px rgba(212, 196, 160, 0.4),
+            0 0 5px rgba(184, 134, 11, 0.3);
+    }
+}
+
+/* 顶部流光条（三类共用，配色来自上面的 --flow-* 变量） */
+.spell-scroll::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+        var(--flow-start) 0%,
+        var(--flow-mid)   25%,
+        var(--flow-end)   50%,
+        var(--flow-mid)   75%,
+        var(--flow-start) 100%);
+    background-size: 200% 100%;
+    animation: magicFlow var(--magic-flow-duration) linear infinite;
+}
+
+/* 悬停时暂停动画并点亮光晕 */
+.spell-scroll:hover::before {
+    animation-play-state: paused;
+    box-shadow: 0 0 10px var(--flow-end), 0 0 20px var(--flow-end);
+}
+
+/* 流光关键帧：峰值亮度/色相由各类型的 --flow-peak / --flow-hue 控制 */
+@keyframes magicFlow {
+    0%   { background-position: 200% 0;  filter: brightness(1) hue-rotate(0deg); }
+    50%  { filter: brightness(var(--flow-peak, 1)) hue-rotate(var(--flow-hue, 0deg)); }
+    100% { background-position: -200% 0; filter: brightness(1) hue-rotate(0deg); }
+}
+
+/* 卷轴头部 */
+.spell-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.spell-name {
+    font-family: var(--font-header);
+    font-size: 1.3rem;
+    color: var(--accent, var(--ink-iron));
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: font-weight 0.3s ease, letter-spacing 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+}
+
+.spell-type {
+    font-family: var(--font-monogram);
+    font-size: 0.8rem;
+    color: var(--accent, var(--ink-blood));
+    background: rgba(139, 0, 0, 0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    border: 1px solid var(--accent, var(--ink-blood));
+    transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 头部与描述之间的装饰分隔线（补足移除元信息栏后的留白） */
+.spell-divider {
+    position: relative;
+    height: 0.9rem;
+    margin: 0 0 0.6rem;
+    flex-shrink: 0;
+}
+
+.spell-divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent,
+        var(--accent, var(--ink-gold)) 50%,
+        transparent);
+    transform: translateY(-50%);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+/* 描述文本 */
+.spell-description {
+    line-height: 1.7;
+    color: var(--ink-sepia);
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent, var(--ink-gold));
+    position: relative;
+    overflow: hidden;
+    transition: max-height 1s cubic-bezier(.44,.14,.17,.86),
+        color 0.3s ease, border-left-color 0.3s ease, border-left-width 0.3s ease;
+    will-change: max-height;
+    font-family: 'STSong', 'SimSun', var(--font-body);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    tab-size: 4;
+    -moz-tab-size: 4;
+}
+
+.spell-description p       { margin-bottom: 0.8em; }
+
+.spell-description.expandable {
+    max-height: calc(1.7em * 4);
+    overflow: hidden;
+}
+
+.spell-description.expandable::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 0;
+    height: 1.5em;
+    background: linear-gradient(to bottom,
+        transparent,
+        rgba(240, 230, 210, 0.95) 80%);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.spell-description.no-fade::after  { display: none; }
+.spell-description.expanded        { max-height: none; }
+.spell-description.expanded::after { opacity: 0; }
+
+/* 展开/收起按钮（卡片与密文档案共用基础样式） */
+.expand-indicator {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+}
+
+.expand-btn,
+.codex-expand-btn {
+    color: var(--ink-gold);
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    background: rgba(184, 134, 11, 0.1);
+    border: 1px solid rgba(184, 134, 11, 0.3);
+    border-radius: 2px;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.expand-btn {
+    gap: 0.3rem;
+    padding: 0.3rem 0.8rem;
+    font-family: var(--font-monogram);
+}
+
+.expand-btn:hover {
+    color: var(--ink-blood);
+    background: rgba(184, 134, 11, 0.2);
+    transform: translateY(-1px);
+}
+
+/* ── 原始档案密文 ─────────────────────────────────────────── */
+.codex-fade {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom,
+        transparent,
+        #1a1206 85%);
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.codex-expand-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 0.8rem 1.5rem 1.2rem;
+    background: linear-gradient(135deg, #1a1206 0%, #2a2012 50%, #1a1206 100%);
+    border-top: 1px solid rgba(184, 134, 11, 0.2);
+}
+
+.codex-expand-btn {
+    gap: 0.4rem;
+    padding: 0.4rem 1.2rem;
+    font-family: 'Cinzel', var(--font-monogram);
+    letter-spacing: 1px;
+    background: rgba(184, 134, 11, 0.08);
+    border-color: rgba(184, 134, 11, 0.25);
+    transition: all 0.25s ease;
+}
+
+.codex-expand-btn:hover {
+    background: rgba(184, 134, 11, 0.18);
+    border-color: rgba(184, 134, 11, 0.5);
+    box-shadow: 0 0 10px rgba(184, 134, 11, 0.15);
+}
+
+.arcane-codex {
+    background:
+        linear-gradient(135deg,
+            #1a1206 0%,
+            #2a2012 50%,
+            #1a1206 100%);
+    border: 4px double var(--ink-gold);
+    border-radius: 2px;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.6),
+        inset 0 0 30px rgba(184, 134, 11, 0.1);
+}
+
+.arcane-codex::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(184, 134, 11, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.codex-header {
+    background: linear-gradient(135deg, #2a2012 0%, #3a2c1c 100%);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--ink-gold);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.codex-title {
+    font-family: 'New Tegomin', 'STZhongsong', '华文中宋', var(--font-illuminated);
+    font-size: 1.5rem;
+    color: var(--ink-gold);
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.ritual-button {
+    background: linear-gradient(135deg, var(--ink-gold) 0%, #8B7500 100%);
+    color: var(--ink-iron);
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-family: var(--font-monogram);
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.ritual-button:hover {
+    background: linear-gradient(135deg, #B8860B 0%, #A67500 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.4);
+}
+
+.ritual-button.copied {
+    background: var(--ink-verdant);
+    color: var(--parchment-old);
+}
+
+.codex-content {
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.arcane-script {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #D4C4A0;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}

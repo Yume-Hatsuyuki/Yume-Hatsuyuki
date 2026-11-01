@@ -1,0 +1,21 @@
+{
+  "name": "梦初雪 (Yume Hatsuyuki) | 混沌少女官方个人设定档案",
+  "short_name": "梦初雪",
+  "icons": [
+    {
+      "src": "/favicon/web-app-manifest-192x192.png?v=v1",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon/web-app-manifest-512x512.png?v=v1",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

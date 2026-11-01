@@ -1,0 +1,16 @@
+{
+  "_comment": "images 字段填写说明（本对象仅作注释，不参与渲染）",
+  "_images_usage": [
+    "images 为数组，每一项渲染为一张轮播主图与一张缩略图",
+    "每项字段：src（必填）、label（可选）、alt（可选）",
+    "src 为站内相对路径，现有数据均以 images/ 开头",
+    "alt 缺省时回退到 label；label 同时作为缩略图下方文字与 title",
+    "本文件在构建时由 build.js 读取并静态注入 HTML，运行时不请求"
+  ],
+  "images": [
+    { "src": "images/AIGC/Art-1/Art-Abyssal.png", "label": "魔龙" },
+    { "src": "images/AIGC/Art-1/Art-Pseudo-Holy.png", "label": "（伪）圣龙" },
+    { "src": "images/AIGC/high-school/IMG-EA1BC570F910135911EA2C8ECF92B830.png", "label": "高中校园时期" },
+    { "src": "images/AIGC/high-school/IMAGE-B72449A01D836D4104C5EB8C11CB3640.png", "label": "高中校园时期（全身图）", "alt": "高中校园时期全身立绘" }
+  ]
+}

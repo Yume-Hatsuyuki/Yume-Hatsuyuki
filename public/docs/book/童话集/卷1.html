@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ╔══════════════════════════════════════════╗
+       ║  【开发者配置区 — 第 1 处】书名           ║
+       ╚══════════════════════════════════════════╝ -->
+  <title>童话集</title>
+
+  <!-- 路径固定为 ../../js/，因为本文件位于 docs/book/<书架名>/ 下 -->
+  <script src="../../js/page-flip.browser.js"></script>
+  <script src="../../js/marked.min.js"></script>
+
+  <!-- 样式表独立文件，所有书本共用同一份 -->
+  <link rel="stylesheet" href="../../css/book.css" />
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════════════════╗
+     ║  【开发者配置区 — 第 2 处】页面顶部书名      ║
+     ╚══════════════════════════════════════════════╝ -->
+<div id="book-title-area">
+  <h1>童话集</h1>
+  <div class="subtitle">卷1</div>
+</div>
+
+<div id="book-container">
+  <div id="book">
+
+  <!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  【开发者配置区 — 第 3 处】页面内容                              ║
+  ║                                                                  ║
+  ║  规则：                                                          ║
+  ║  · 每个 <div class="page"> = 一页                               ║
+  ║  · 总页数必须为【偶数】                                          ║
+  ║  · 第一页 / 最后一页加 data-density="hard" 作为硬封面           ║
+  ║  · 奇数页显示在右侧，偶数页显示在左侧                            ║
+  ║                                                                  ║
+  ║  URL Hash 规则：                                                 ║
+  ║  · book.html#0  → 封面正面                                       ║
+  ║  · book.html#1  → 正文第1页                                      ║
+  ║  · book.html#N  → 正文第N页                                      ║
+  ║  · 封面内侧不记录 URL，封底记录为最后页码                         ║
+  ║  · 翻页后自动更新 URL，支持浏览器前进/后退                        ║
+  ║                                                                  ║
+  ║  可用组件速查（直接复制进 .page-inner 使用）：                    ║
+  ║  · .chapter-heading  章节标题                                    ║
+  ║  · .page-text > p    正文段落（首行缩进）                         ║
+  ║  · .callout-box      划重点框（红色）                            ║
+  ║  · .callout-box.green 划重点框（绿色，用于注记）                  ║
+  ║  · .ornament-divider 装饰分隔符                                  ║
+  ║  · .page-footer      页码行                                      ║
+  ╚══════════════════════════════════════════════════════════════════╝
+  -->
+
+    <!-- ═══ 封面（右，硬页） ═══ -->
+    <div class="page cover-page" data-density="hard">
+      <div class="page-inner">
+        <div class="cover-border"></div>
+        <div class="cover-ornament">☩</div>
+        <div class="cover-title">童话集</div>
+        <div class="cover-divider"></div>
+        <div class="cover-subtitle">BOOK TITLE</div>
+        <div class="cover-subtitle" style="margin-top:6px; font-size:.7rem;">第 1 卷</div>
+        <div class="cover-author">作者 · <del>███</del></div>
+        <div class="cover-bottom-ornament">⸻ ✦ ⸻</div>
+      </div>
+    </div>
+
+    <!-- ═══ 封面内侧（左，硬页） ═══ -->
+    <div class="page cover-page" data-density="hard">
+      <div class="page-inner">
+        <div class="cover-border"></div>
+        <div style="text-align:center; margin-top:40px;">
+          <div class="cover-divider" style="margin-top:24px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 第1页：外链 Markdown（右） ═══
+         data-md-src 指向相对于本 HTML 的 .md 文件路径
+         需要通过本地服务器访问（python -m http.server 8080）  ═══ -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-heading">
+          <div class="chapter-label">第一章</div>
+          <div class="chapter-title">湖中骑士</div>
+        </div>
+        <!-- 外链写法：内容在独立 md 文件里维护 -->
+        <div class="page-text" data-md-src="md/p1.md"></div>
+        <div class="page-footer">
+          <span class="page-number">第 1 页</span>
+          <span class="page-chapter-ref">第一章 · 湖中骑士</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 第2页：外链 Markdown（左） ═══ -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="page-text" data-md-src="md/p2.md"></div>
+        <div class="page-footer">
+          <span class="page-chapter-ref">第一章 · 湖中骑士</span>
+          <span class="page-number">第 2 页</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 第3页：外链 Markdown（右） ═══ -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="page-text" data-md-src="md/p3.md"></div>
+        <div class="page-footer">
+          <span class="page-number">第 3 页</span>
+          <span class="page-chapter-ref">第一章 · 湖中骑士</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 第4页：外链 Markdown（左） ═══ -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="chapter-heading">
+          <div class="chapter-label">第二章</div>
+          <div class="chapter-title">迷茫</div>
+        </div>
+        <!-- 外链写法：内容在独立 md 文件里维护 -->
+        <div class="page-text" data-md-src="md/p4.md"></div>
+        <div class="page-footer">
+          <span class="page-number">第 4 页</span>
+          <span class="page-chapter-ref">第二章 · 迷茫</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 第5页：外链 Markdown（右） ═══ -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="page-text" data-md-src="md/p5.md"></div>
+        <div class="page-footer">
+          <span class="page-number">第 5 页</span>
+          <span class="page-chapter-ref">第二章 · 迷茫</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 第6页：外链 Markdown（右） ═══ -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="page-text" data-md-src="md/p6.md"></div>
+        <div class="page-footer">
+          <span class="page-number">第 6 页</span>
+          <span class="page-chapter-ref">第二章 · 迷茫</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 第7页：外链 Markdown（右） ═══ -->
+    <div class="page">
+      <div class="page-inner">
+        <div class="page-text" data-md-src="md/p7.md"></div>
+        <div class="page-footer">
+          <span class="page-number">第 7 页</span>
+          <span class="page-chapter-ref">第二章 · 迷茫</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 封底（左，硬页） ═══ -->
+    <!-- 注意：封底永远是最后一页，添加新内容页时把它往后移 -->
+    <div class="page back-cover" data-density="hard">
+      <div class="page-inner">
+        <div class="cover-border"></div>
+        <div style="text-align:center;">
+          <div class="cover-divider" style="margin-top:20px;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- #book -->
+</div><!-- #book-container -->
+
+<div id="controls">
+  <button class="btn-nav" id="btn-prev">◀ 上一页</button>
+  <div id="page-info">— / —</div>
+  <button class="btn-nav" id="btn-next">下一页 ▶</button>
+</div>
+<div id="hint">点击页面边角可翻页 · 支持触摸滑动 · URL #页码 可直达指定页</div>
+
+<script src="../../js/book.js"></script>
+
+</body>
+</html>

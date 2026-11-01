@@ -1,0 +1,49 @@
+/* ============================================================
+   variables.css — 设计令牌 & CSS 自定义属性
+   梦初雪 (Yume Hatsuyuki) 角色档案卷轴
+   ============================================================ */
+
+:root {
+    /* 羊皮纸色调 */
+    --parchment-old:     #F0E6D2;
+    --parchment-stained: #E8D8B6;
+    --parchment-dark:    #D4C4A0;
+    --parchment-burnt:   #B8A079;
+
+    /* 古老墨水色调 */
+    --ink-iron:         #3A2C1C;
+    --ink-sepia:        #5C4033;
+    --ink-blood:        #8B0000;
+    --ink-gold:         #B8860B;
+    --ink-verdant:      #556B2F;
+    --ink-royal-purple: #4B0082;
+
+    /* 流动效果颜色 */
+    --flow-gold-start:   #B8860B;
+    --flow-gold-mid:     #DAA520;
+    --flow-gold-end:     #D8B600;
+
+    --flow-purple-start: #4B0082;
+    --flow-purple-mid:   #6A0DAD;
+    --flow-purple-end:   #8A2BE2;
+
+    --flow-blood-start:  #8B0000;
+    --flow-blood-mid:    #B22222;
+    --flow-blood-end:    #DC143C;
+
+    /* 魔法流光动画时长 */
+    --magic-flow-duration: 3s;
+
+    /* 阴影与光晕 */
+    --shadow-heavy: rgba(42, 32, 18, 0.6);
+    --shadow-light: rgba(42, 32, 18, 0.3);
+    --glow-gold:    rgba(184, 134, 11, 0.4);
+    --glow-blood:   rgba(139, 0, 0, 0.3);
+
+    /* 字体栈 */
+    --font-illuminated: 'UnifrakturMaguntia', 'STSong', 'SimSun', serif;
+    --font-header:      'Cinzel', 'Cormorant Garamond', 'STSong', 'SimSun', serif;
+    --font-body:        'Cormorant Garamond', 'IM Fell English', 'STSong', 'SimSun', serif;
+    --font-monogram:    'MedievalSharp', 'STSong', 'SimSun', monospace;
+    --font-script:      'IM Fell English', 'STSong', 'SimSun', serif;
+}

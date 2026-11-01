@@ -1,0 +1,99 @@
+/* ============================================================
+   fonts.css — 本地字体定义 & 字体加载状态
+   梦初雪 (Yume Hatsuyuki) 角色档案卷轴
+   ============================================================ */
+
+/* ── Cinzel ─────────────────────────────────────────────── */
+@font-face {
+    font-family: 'Cinzel';
+    src: url('../fonts/Cinzel/static/Cinzel-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cinzel';
+    src: url('../fonts/Cinzel/static/Cinzel-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cinzel';
+    src: url('../fonts/Cinzel/static/Cinzel-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ── MedievalSharp ───────────────────────────────────────── */
+@font-face {
+    font-family: 'MedievalSharp';
+    src: url('../fonts/MedievalSharp/MedievalSharp-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ── UnifrakturMaguntia ──────────────────────────────────── */
+@font-face {
+    font-family: 'UnifrakturMaguntia';
+    src: url('../fonts/UnifrakturMaguntia/UnifrakturMaguntia-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ── Cormorant Garamond（可变字体，单条声明覆盖全权重） ── */
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('../fonts/Cormorant_Garamond/CormorantGaramond-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('../fonts/Cormorant_Garamond/CormorantGaramond-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* ── IM Fell English ─────────────────────────────────────── */
+@font-face {
+    font-family: 'IM Fell English';
+    src: url('../fonts/IM_Fell_English/IMFellEnglish-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IM Fell English';
+    src: url('../fonts/IM_Fell_English/IMFellEnglish-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* ── New Tegomin ─────────────────────────────────────────── */
+@font-face {
+    font-family: 'New Tegomin';
+    src: url('../fonts/New_Tegomin/NewTegomin-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ── 字体加载完成后对特定元素应用专用字体 ──────────────── */
+.fonts-loaded .poem-verse,
+.fonts-loaded .profile-table td,
+.fonts-loaded .spell-description,
+.fonts-loaded .character-tagline,
+.fonts-loaded .codex-title {
+    font-family: 'New Tegomin', 'STSong', 'SimSun', serif;
+}

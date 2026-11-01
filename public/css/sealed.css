@@ -1,0 +1,175 @@
+/* ============================================================
+   sealed.css — 封印之间（画廊内的加密图片区）
+   依赖 variables.css 中的羊皮纸 / 墨色 / 光晕变量
+   ============================================================ */
+
+/* 滤镜定义：不占位、不可见，仅供 filter: url(#sealed-corrupt) 引用 */
+.sealed-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+/* 挂在外形特征画廊之后，归属于同一个区块 */
+.sealed-gallery {
+    margin-top: 2.5rem;
+}
+
+.sealed-title {
+    font-family: var(--font-header);
+    font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+    color: var(--ink-blood);
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 0 0 0.4rem;
+}
+
+.sealed-hint {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--ink-sepia);
+    text-align: center;
+    min-height: 1.6em;
+    margin: 0 0 1rem;
+}
+
+/* 与 .carousel-main-display 同款的墨色画框 */
+.sealed-stage {
+    position: relative;
+    min-height: 260px;
+    padding: 16px;
+    background: var(--ink-iron);
+    border: 2px solid var(--ink-gold);
+    box-shadow:
+        0 8px 30px var(--shadow-heavy),
+        inset 0 0 20px rgba(184, 134, 11, 0.05);
+    overflow: hidden;
+}
+
+/* ── 封印：可点击的损坏区域 ─────────────────────────────── */
+.sealed-cover {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background:
+        radial-gradient(circle at 50% 45%, rgba(139, 0, 0, 0.35), transparent 60%),
+        var(--ink-iron);
+    color: var(--ink-gold);
+    font: inherit;
+    cursor: pointer;
+    filter: url(#sealed-corrupt);      /* 损坏的核心：位移随点击加深 */
+    transition: opacity 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 表面颗粒（噪点用 data URI，不需要额外图片文件） */
+.sealed-cover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.sealed-cover:hover .sealed-sigil { color: var(--flow-gold-mid); }
+.sealed-cover:active .sealed-sigil { transform: scale(0.96); }
+.sealed-cover:focus-visible { outline: 2px dashed var(--ink-gold); outline-offset: -10px; }
+.sealed-cover.is-breaking { opacity: 0; pointer-events: none; }
+
+.sealed-sigil {
+    position: relative;
+    width: clamp(72px, 22vw, 104px);
+    height: clamp(72px, 22vw, 104px);
+    transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.sealed-cracks {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.sealed-crack {
+    fill: none;
+    stroke: var(--flow-blood-end);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    filter: drop-shadow(0 0 3px var(--flow-blood-mid));
+    animation: sealedDraw 0.45s ease-out forwards;
+}
+
+@keyframes sealedDraw {
+    to { stroke-dashoffset: 0; }
+}
+
+/* ── 碎片与闪光（由 JS 动态生成） ───────────────────────── */
+.sealed-shard {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: var(--ink-iron);
+    pointer-events: none;
+}
+
+.sealed-flash {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    background: radial-gradient(circle,
+        rgba(255, 220, 150, 0.85),
+        rgba(218, 165, 32, 0.3) 60%,
+        transparent 80%);
+}
+
+/* ── 解封后的图片 ───────────────────────────────────────── */
+.sealed-reveal {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    outline: none;
+}
+
+.sealed-reveal[hidden] { display: none; }
+
+.sealed-item { margin: 0; }
+
+.sealed-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 2px solid var(--ink-gold);
+    border-radius: 2px;
+    box-shadow: 0 6px 18px var(--shadow-heavy);
+    cursor: zoom-in;
+}
+
+.sealed-item figcaption {
+    margin-top: 6px;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--parchment-old);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sealed-crack { animation: none; stroke-dashoffset: 0; }
+}

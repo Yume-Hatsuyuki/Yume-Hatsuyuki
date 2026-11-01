@@ -1,0 +1,11 @@
+# 部署与忽略配置本身
+.assetsignore
+wrangler.jsonc
+
+# 静态构建相关资源
+*.json
+index.template.html
+build.js
+
+# 其他
+README.md
