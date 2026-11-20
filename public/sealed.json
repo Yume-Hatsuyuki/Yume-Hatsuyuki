@@ -8,6 +8,7 @@
     "本文件在构建时由 build.js 读取并静态注入 HTML，运行时不请求"
   ],
   "images": [
+    { "src": "images/AIGC/hentai/战败CG.png", "caption": "战败CG" },
     { "src": "images/AIGC/hentai/马桶比心-1.png", "caption": "未知地点-2026/10/23-10:41:06" },
     { "src": "images/AIGC/hentai/马桶比心-2.png", "caption": "未知地点-2026/10/23-10:41:13" },
     { "src": "images/AIGC/hentai/马桶比心-3.png", "caption": "未知地点-2026/10/23-10:41:18" },
